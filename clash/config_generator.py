@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Date    : 2022-12-07 22:25:22
 # @Author  : Adam Wen (adamwen829@gmail.com)
-
+import json
 from copy import deepcopy
 from enum import Enum
 
@@ -39,10 +39,9 @@ class RuleSetMeta(type):
 
 DEFAULT_RULE_INTERVAL = 86400
 
-PROXY_PROVIDERS = {
-    'Dler Cloud':
-    "-"
-}
+
+with open('./proxy_providers.json', 'r') as f:
+    PROXY_PROVIDERS = json.load(f)
 
 
 class RuleSet(metaclass=RuleSetMeta):
@@ -55,6 +54,7 @@ class RuleSet(metaclass=RuleSetMeta):
     Proxy = {"proxies": ["DIRECT"]}
     Domestic = {"proxies": ["DIRECT", "Proxy"]}
     Others = {"proxies": ["Proxy", "DIRECT"]}
+    Duolingo = {"proxies": ["DIRECT", "Proxy"]}
     Apple_News = {"proxies": ["DIRECT", "Proxy"]}
     Apple_TV = {"proxies": ["DIRECT", "Proxy"]}
     Apple_Music = {"proxies": ["DIRECT", "Proxy"]}
@@ -84,6 +84,10 @@ RULES_IN = {
         'url':
         'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Reject.yaml',
         'rule-set': RuleSet.AdBlock
+    },
+    'Duolingo': {
+        'url': 'https://cdn.jsdelivr.net/gh/adamwen829/myrc@main/clash/duolingo.yaml',
+        'rule-set': RuleSet.Duolingo
     },
     'Special': {
         'url':

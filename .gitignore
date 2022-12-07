@@ -1,6 +1,7 @@
 .git
 .direnv
 __cache__
+proxy_providers.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

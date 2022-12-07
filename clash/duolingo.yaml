@@ -1,3 +1,4 @@
 payload:
-  - 'duolingo.*'
-  - '*.duolingo.*'
+  - DOMAIN-SUFFIX,duolingo.com
+  - DOMAIN-SUFFIX,duolingo.cn
+  - DOMAIN-KEYWORD,duolingo
