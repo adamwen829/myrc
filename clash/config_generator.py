@@ -86,7 +86,7 @@ RULES_IN = {
         'rule-set': RuleSet.AdBlock
     },
     'Duolingo': {
-        'url': 'https://cdn.jsdelivr.net/gh/adamwen829/myrc@main/clash/duolingo.yaml',
+        'url': 'https://cdn.jsdelivr.net/gh/adamwen829/myrc@3337939952e961ed8ed1488a3f103323a68e10fc/clash/duolingo.yaml',
         'rule-set': RuleSet.Duolingo
     },
     'Special': {
@@ -415,6 +415,8 @@ def generate_proxy_groups():
         for name, _ in PROXY_PROVIDERS.items():
             proxy_group['use'].append(name)
         proxy_group['name'] = ruleset.name
+        if ruleset != RuleSet.Auto_UrlTest:
+            proxy_group['proxies'].append(RuleSet.Auto_UrlTest.name)
         proxy_groups.append(proxy_group)
 
     return proxy_groups
@@ -448,8 +450,8 @@ def generate():
     dynamic_config = {
         'proxy-providers': generate_proxy_providers(),
         'proxy-groups': generate_proxy_groups(),
+        'rules': generate_rule_rule_providers(RULES_IN),
         'rule-providers': generate_rule_providers(RULES_IN),
-        'rules': generate_rule_rule_providers(RULES_IN)
     }
     dynamic = yaml.dump(dynamic_config, Dumper=yaml.Dumper)
     config = head+dynamic
